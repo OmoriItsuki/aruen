@@ -1,4 +1,0 @@
--bash-4.2$ pwd
-/home/sys/s236049
--bash-4.2$ ls
-MyScan  Windows  algorithm1  nextdir  public_html
