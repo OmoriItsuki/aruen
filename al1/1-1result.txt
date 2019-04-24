@@ -1,0 +1,4 @@
+-bash-4.2$ pwd
+/home/sys/s236088/algorithm1
+-bash-4.2$ ls
+nextdir  test.txt
