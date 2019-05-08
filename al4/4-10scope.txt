@@ -1,11 +1,4 @@
-#include <stdio.h>
-int sum(int n){
-    return n*(n+1)/2;
-}
-
-int main(void){
-    int n;
-    printf("input n:");
-    scanf("%d\n",&n);
-    printf("%d",sum(n));
-}
+1. A print_x関数内で呼ばれているxはprint_x関数内でXの宣言をしていないため、print_x関数,main関数のブロック有効範囲外で宣言したAのxを呼んでいる。
+2. B main関数のブロック有効範囲内でxの宣言があるため、Bのxが呼ばれている。
+3. C for文のブロック有効範囲内でxの宣言があるため、Cのxが呼ばれている。
+4. B main関数のブロック有効範囲内ではあるが、for文のブロック有効範囲内ではないため、main関数のBのxが呼ばれている。

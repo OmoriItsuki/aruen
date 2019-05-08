@@ -1,42 +1,20 @@
 #include <stdio.h>
 
-int score[10];
-void input_multiple_scores(int);
-int max_score(int);
-float average(int);
-
-int main(void){
-    input_multiple_scores(10);
-    printf("平均点は%.1f点、最高点は%d点です。",average(10),max_score(10));
-}
-
-void input_multiple_scores(int num){
-    for(int i=0;i<num;i++){
-        int input;
-        do{
-            printf("値を入力してください:");
-            scanf("%d\n",&input);
-            while(input<0|100<input){
-                printf("値を再入力してください:");
-                scanf("%d\n",&input);
-            }
-        }while(input<0|100<input);
-        score[i]=input;
-    }
-}
-
-int max_score(int num){
-    int max=0;
-    for(int i=0;i<num;i++){
-        max=max>score[i]?max:score[i];
-    }
+int input_score(void){
+    int n,max=0;
+    do{
+        printf("値を入力してください:");
+        scanf("%d\n",&n);
+        if(n<0|100<=n){
+            printf("値を再入力してください:");
+            scanf("%d\n",&n);
+        }
+        max=max>n?max:n;
+    }while(n!=0);
     return max;
 }
 
-float average(int num){
-    float sum=0;
-    for(int i=0;i<num;i++){
-        sum+=score[i];
-    }
-    return sum/num;
+int main(void){
+    int max=input_score();
+    printf("入力された最大値は%dです。",max);
 }
