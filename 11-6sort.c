@@ -17,7 +17,7 @@ Word *create_word(){
 int read_word(FILE *fp,char *buf){
     int c;
     int k=0;
-    for (int i = 0; buf[i]!='\0'; i++)
+    for (int i = 0; i<20; i++)
         {
             buf[i]='\0';
         }
@@ -35,6 +35,7 @@ int read_word(FILE *fp,char *buf){
                 break;
             default:
                 buf[k]=c;
+                //printf("%c %s %d\n",c,buf,k);
                 k++;
                 break;
             }
@@ -84,7 +85,6 @@ Word *add_node(char *buf,Word *root){
     return root;
 }
 
-
 void main(){
     Word *root=NULL;
     char buf[20];
@@ -98,6 +98,7 @@ void main(){
 
     while (read_word(fp,buf)>0)
     {
+        //printf("%s\n",buf);
         root=add_node(buf,root);
     }
     print_nodes(root);

@@ -29,6 +29,8 @@ int read_word(FILE *fp,char *buf){
                 break;
             case 44:
             case 46:
+            case 13:
+            case 10:
                 break;
             default:
                 buf[k]=c;
@@ -40,7 +42,7 @@ int read_word(FILE *fp,char *buf){
 }
 
 void print_nodes(Word *root){
-    Word *tmp=root;
+    Word *tmp=root->next;
     do{
         printf("%s ",tmp->name);
     }while((tmp=tmp->next)!=NULL);
@@ -48,23 +50,19 @@ void print_nodes(Word *root){
 }
 
 Word *add_node(char *buf,Word *root){
-    Word *p=create_word();
+    Word *p;
     Word *tmp=NULL;
-    if(p!=NULL){
-        if(root==NULL){
-            root=p;
-            p=create_word();
-            tmp=root;
-        }else{
-            tmp=root;       
-            while(tmp->next!=NULL){
-                tmp=tmp->next;
-            }
-        }
-        tmp->next=p;
-        p->next=NULL;
-        strcpy(p->name,buf);
+    if(root==NULL){
+        root=malloc(sizeof(Word));
     }
+    p=malloc(sizeof(Word));
+    tmp=root;
+    while (tmp->next!=NULL){
+        tmp=tmp->next;
+    }
+    tmp->next=p;
+    p->next=NULL;
+    strcpy(p->name,buf);
     return root;
 }
 

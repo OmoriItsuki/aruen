@@ -18,6 +18,8 @@ int read_word(FILE *fp,char *buf){
                 break;
             case 44:
             case 46:
+            case 13:
+            case 10:
                 break;
             default:
                 buf[k]=c;

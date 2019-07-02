@@ -31,6 +31,7 @@ int read_word(FILE *fp,char *buf){
             case 44:
             case 46:
             case 13:
+            case 10:
                 break;
             default:
                 buf[k]=c;
@@ -42,34 +43,37 @@ int read_word(FILE *fp,char *buf){
 }
 
 void print_nodes(Word *root){
-    Word *tmp=root;
+    Word *tmp=root->next;
     do{
         printf("%13s %2d\n",tmp->name,tmp->count);
     }while((tmp=tmp->next)!=NULL);
 }
 
 Word *add_node(char *buf,Word *root){
+    Word *p;
     Word *tmp=NULL;
-    int check=1;
-    //初回処理
     if(root==NULL){
         root=create_word();
     }
-    tmp=root;       
-    while(tmp->next!=NULL){
-        tmp=tmp->next;
-        if(strcmp(tmp->name,buf)==0){
-            tmp->count++;
-            check=0;
+    tmp=root;
+    do
+    {
+        if(tmp->next==NULL)
+        {
+            p=create_word();
+            strcpy(p->name,buf);
+            p->next=NULL;
+            tmp->next=p;
+            p->count=1;
+            return root;
+        }else if (strcmp(buf,(tmp->next)->name)==0)
+        {
+            tmp->next->count++;
+            return root;
         }
-    }
-    if(check){
-        Word *p=create_word();
-        tmp->next=p;
-        p->next=NULL;
-        strcpy(p->name,buf);
-        p->count=1;
-    }
+        
+        tmp=tmp->next;
+    } while (tmp!=NULL);
     return root;
 }
 
