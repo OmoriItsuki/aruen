@@ -31,6 +31,7 @@ int read_word(FILE *fp,char *buf){
             case 44:
             case 46:
             case 13:
+            case 10:
                 break;
             default:
                 buf[k]=c;
@@ -42,7 +43,7 @@ int read_word(FILE *fp,char *buf){
 }
 
 void print_nodes(Word *root){
-    Word *tmp=root;
+    Word *tmp=root->next;
     do{
         printf("%13s %2d\n",tmp->name,tmp->count);
     }while((tmp=tmp->next)!=NULL);
@@ -55,61 +56,34 @@ Word *add_node(char *buf,Word *root){
     if(root==NULL){
         root=create_word();
     }
-    // tmp=root;       
-    // while(tmp->next!=NULL){
-    //     tmp=tmp->next;
-    //     if(strcmp(tmp->name,buf)==0){
-    //         tmp->count++;
-    //         check=0;
-    //         break;
-    //     }
-    // }
-    // if(check){
-    //     p=create_word();
-    //     tmp->next=NULL;
-    //     strcpy(p->name,buf);
-    //     p->count=1;
-    //     tmp=root;
-    //     while(strcmp(tmp->name,p->name)>0){
-    //         tmp=tmp->next;
-    //         printf("%s",tmp->name);
-    //     }
-    //     tmp->next=p;
-    //     p->next=tmp->next->next;
-    // }
     tmp=root;
     do{
         //最も後ろに挿入する場合
         if(tmp->next==NULL){
-            //printf("insert last index");fflush(stdout);
             p=create_word();
             strcpy(p->name,buf);
             p->next=NULL;
             tmp->next=p;
-            break;
+            p->count=1;
+            return root;
         //線形リストに一致するデータがあった場合
         }else if(strcmp(buf,(tmp->next)->name)==0){
-            //printf("match word");fflush(stdout);
             tmp->next->count++;
-            break;
+            return root;
         //tmpとtmp->nextの間に挿入すべき場合
-        }else if(tmp->next!=NULL&strcmp(buf,(tmp->next)->name)<0){
-            //printf("insert mid index\n%s\n",tmp->name);fflush(stdout);
+        }else if(strcmp(buf,(tmp->next)->name)<0){
             p=create_word();
             strcpy(p->name,buf);
-            tmp->count=1;
+            p->count=1;
             p->next=tmp->next;
             tmp->next=p;
-            tmp=p;
+            return root;
         }
         tmp=tmp->next;
-    }while(tmp->next!=NULL);
+    }while(tmp!=NULL);
     return root;
 }
 
-void node_sort(Word *root){
-
-}
 
 void main(){
     Word *root=NULL;
