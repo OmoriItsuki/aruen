@@ -1,0 +1,3 @@
+﻿Name:Takahashi,Height:155,Weight:50.0,Scholarship:80000
+Name:Watanabe,Height:165,Weight:55,Scholarship:70000
+Name:Ito,Height:175,Weight:60,Scholarship:60000
